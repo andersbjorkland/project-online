@@ -3,7 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\BlogPost;
-use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
@@ -26,14 +25,14 @@ class BlogPostCrudController extends AbstractCrudController
 	    return [
 		    TextField::new('title'),
 		    TextareaField::new('summary'),
-		    TextEditorField::new('text')->addCssClass('blog-text'),
+		    TextEditorField::new('content')->addCssClass('blog-text'),
 	    ];
     }
 
     public function createEntity( string $entityFqcn ) {
 	    $blogPost = new BlogPost();
 	    $blogPost->setIsDraft(false);
-	    $blogPost->setUser((User::class) ($this->getUser()) );
+	    $blogPost->setUser($this->getUser() );
 	    return $blogPost;
     }
 }

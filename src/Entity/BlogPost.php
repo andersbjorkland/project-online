@@ -60,6 +60,11 @@ class BlogPost
      */
     private $isDraft;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $summary;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -177,6 +182,18 @@ class BlogPost
     public function setIsDraft(bool $isDraft): self
     {
         $this->isDraft = $isDraft;
+
+        return $this;
+    }
+
+    public function getSummary(): ?string
+    {
+        return $this->summary;
+    }
+
+    public function setSummary(?string $summary): self
+    {
+        $this->summary = $summary;
 
         return $this;
     }
