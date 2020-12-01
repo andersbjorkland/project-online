@@ -3,8 +3,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\BlogPost;
+use DateTime;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -26,13 +29,17 @@ class BlogPostCrudController extends AbstractCrudController
 		    TextField::new('title'),
 		    TextareaField::new('summary'),
 		    TextEditorField::new('content')->addCssClass('blog-text'),
+		    DateTimeField::new('publishAt'),
+		    BooleanField::new('isDraft')
 	    ];
     }
 
     public function createEntity( string $entityFqcn ) {
 	    $blogPost = new BlogPost();
-	    $blogPost->setIsDraft(false);
+	    //$blogPost->setIsDraft(false);
 	    $blogPost->setUser($this->getUser() );
+	    $blogPost->setCreatedAt(new DateTime());
+	    $blogPost->setModifiedAt(new DateTime());
 	    return $blogPost;
     }
 }

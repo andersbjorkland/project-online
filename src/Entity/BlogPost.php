@@ -51,11 +51,6 @@ class BlogPost
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="name")
-     */
-    private $categories;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $isDraft;
@@ -64,6 +59,11 @@ class BlogPost
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $summary;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="blogPosts")
+     */
+    private $categories;
 
     public function __construct()
     {
@@ -147,33 +147,6 @@ class BlogPost
         return $this;
     }
 
-    /**
-     * @return Collection|Category[]
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
-
-    public function addCategory(Category $category): self
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
-            $category->addName($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Category $category): self
-    {
-        if ($this->categories->removeElement($category)) {
-            $category->removeName($this);
-        }
-
-        return $this;
-    }
-
     public function getIsDraft(): ?bool
     {
         return $this->isDraft;
@@ -194,6 +167,33 @@ class BlogPost
     public function setSummary(?string $summary): self
     {
         $this->summary = $summary;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+	        $category->addBlogPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->categories->removeElement($category)) {
+	        $category->removeBlogPost($this);
+        }
 
         return $this;
     }

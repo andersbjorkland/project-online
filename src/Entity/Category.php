@@ -20,13 +20,19 @@ class Category
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity=BlogPost::class, inversedBy="categories")
+     * @ORM\Column(type="string", length=255)
      */
     private $name;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=BlogPost::class, inversedBy="categories")
+     */
+    private $blogPosts;
+
+
     public function __construct()
     {
-        $this->name = new ArrayCollection();
+        $this->blogPosts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -34,26 +40,38 @@ class Category
         return $this->id;
     }
 
-    /**
-     * @return Collection|BlogPost[]
-     */
-    public function getName(): Collection
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function addName(BlogPost $name): self
+    public function setName(string $name): self
     {
-        if (!$this->name->contains($name)) {
-            $this->name[] = $name;
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|BlogPost[]
+     */
+    public function getBlogPosts(): Collection
+    {
+        return $this->blogPosts;
+    }
+
+    public function addBlogPost(BlogPost $blogPost): self
+    {
+        if (!$this->blogPosts->contains($blogPost)) {
+            $this->blogPosts[] = $blogPost;
         }
 
         return $this;
     }
 
-    public function removeName(BlogPost $name): self
+    public function removeBlogPost(BlogPost $blogPost): self
     {
-        $this->name->removeElement($name);
+        $this->blogPosts->removeElement($blogPost);
 
         return $this;
     }

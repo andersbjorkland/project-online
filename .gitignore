@@ -10,4 +10,5 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
-/src/assets/css/*.css*
+/public/assets/css/*.css*
+/public/uploads/
