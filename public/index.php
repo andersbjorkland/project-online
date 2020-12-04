@@ -5,22 +5,21 @@ use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
 
+$isProd = false;
 $vendors = '';
+$envs = '';
+
 if (strpos($_SERVER['SERVER_NAME'], 'localhost') !== false
     || strpos($_SERVER['SERVER_NAME'], '127.0.0.1') !== false) {
 	$vendors =  dirname(__DIR__).'/vendor/autoload.php';
-	echo "DEV\n";
+	$envs = dirname(__DIR__).'/.env';
 } else {
-	$vendors =  dirname(__DIR__).'/vendor/autoload.php';
-	echo "PROD!\n";
+	$vendors =  dirname(__DIR__).'/../httpd.private/playground/vendor/autoload.php';
+	$envs = dirname(__DIR__).'/../httpd.private/playground/.env';
 }
-echo $_SERVER['SERVER_NAME'];
-
 require $vendors;
 
-(new Dotenv())->bootEnv(dirname(__DIR__).'/.env');
-dd($vendors);
-
+(new Dotenv())->bootEnv($envs);
 
 if ($_SERVER['APP_DEBUG']) {
     umask(0000);

@@ -6,6 +6,7 @@ use App\Entity\BlogPost;
 use DateTime;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
@@ -30,7 +31,8 @@ class BlogPostCrudController extends AbstractCrudController
 		    TextareaField::new('summary'),
 		    TextEditorField::new('content')->addCssClass('blog-text'),
 		    DateTimeField::new('publishAt'),
-		    BooleanField::new('isDraft')
+		    BooleanField::new('isDraft'),
+		    AssociationField::new('categories')
 	    ];
     }
 
