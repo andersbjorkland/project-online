@@ -1,6 +1,11 @@
 (function() {
+    const document = window.document;
+    const hostServer = document.location.origin;
     console.log("uploader.js is loaded");
-    var HOST = "https://localhost:8000/admin/file-upload"
+    const target = hostServer;
+
+    const HOST = target + "/admin/file-upload";
+    console.log("Host target: " + HOST);
 
     addEventListener("trix-attachment-add", function(event) {
         console.log('Event registered.');
@@ -11,6 +16,7 @@
     })
 
     function uploadFileAttachment(attachment) {
+        console.log(attachment);
         uploadFile(attachment.file, setProgress, setAttributes)
 
         function setProgress(progress) {
@@ -37,8 +43,8 @@
             .then(json => {
                 console.log('Success: ', json);
                 var attributes = {
-                    url: 'https://localhost:8000' + json.filepath,
-                    href: 'https://localhost:8000' + json.filepath + "?content-disposition=attachment"
+                    url: target + json.filepath,
+                    href: target + json.filepath + "?content-disposition=attachment"
                 }
                 successCallback(attributes)
             })

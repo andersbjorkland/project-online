@@ -32,13 +32,12 @@ class BlogPostCrudController extends AbstractCrudController
 		    TextEditorField::new('content')->addCssClass('blog-text'),
 		    DateTimeField::new('publishAt'),
 		    BooleanField::new('isDraft'),
-		    AssociationField::new('categories')
+		    AssociationField::new('categories'),
 	    ];
     }
 
     public function createEntity( string $entityFqcn ) {
 	    $blogPost = new BlogPost();
-	    //$blogPost->setIsDraft(false);
 	    $blogPost->setUser($this->getUser() );
 	    $blogPost->setCreatedAt(new DateTime());
 	    $blogPost->setModifiedAt(new DateTime());

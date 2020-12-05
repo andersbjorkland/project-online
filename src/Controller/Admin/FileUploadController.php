@@ -17,19 +17,32 @@ class FileUploadController extends AbstractController
 	 * @Route("/admin/file-upload", name="admin_upload", methods={"post", "put"})
 	 */
 	public function addImage(Request $request, LoggerInterface $logger) {
-
 		$uploadedFile = $request->files->get('file');
 		$destination = $this->getParameter('kernel.project_dir').'/public/uploads';
+
+		$allowedFiles = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'];
 
 
 		if (!$uploadedFile) {
 			return new JsonResponse(array(
 				'status' => 'Error',
 				'message' => 'No image to upload'),
-				Response::HTTP_NOT_FOUND);
+				Response::HTTP_FORBIDDEN);
 		}
+
+		$extension = $uploadedFile->guessExtension();
+		if (!in_array($extension, $allowedFiles)) {
+			return new JsonResponse(array(
+				'status' => 'Error',
+				'message' => 'Not allowed filetype: ' . $extension),
+				Response::HTTP_FORBIDDEN);
+		}
+
+
 		$originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
-		$newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+		$newFilename = $originalFilename . '-' . uniqid() . '.' . $extension;
+		$logger->info("################################################################");
+		$logger->info($extension);
 		$uploadedFile->move($destination, $newFilename);
 
 		$response = new Response();
