@@ -4,7 +4,6 @@
 namespace App\Controller\Admin;
 
 
-use http\Env;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -21,7 +20,8 @@ class FileUploadController extends AbstractController
 		$uploadedFile = $request->files->get('file');
 
 		$target = '';
-		if ($_SERVER['APP_ENV'] !== 'prod') {
+		if (strpos($_SERVER['SERVER_NAME'], 'localhost') !== false
+		    || strpos($_SERVER['SERVER_NAME'], '127.0.0.1') !== false) {
 			$target = $this->getParameter('kernel.project_dir') . '/public';
 		}
 
