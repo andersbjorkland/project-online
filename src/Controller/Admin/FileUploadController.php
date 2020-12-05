@@ -22,10 +22,10 @@ class FileUploadController extends AbstractController
 
 		$target = '';
 		if ($_SERVER['APP_ENV'] !== 'prod') {
-			$target = $this->getParameter('kernel.project_dir');
+			$target = $this->getParameter('kernel.project_dir') . '/public';
 		}
 
-		$destination = $target.'/public/uploads';
+		$destination = $target.'/uploads';
 
 		$allowedFiles = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'];
 
