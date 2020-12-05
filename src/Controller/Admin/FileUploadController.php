@@ -4,6 +4,7 @@
 namespace App\Controller\Admin;
 
 
+use http\Env;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -18,7 +19,13 @@ class FileUploadController extends AbstractController
 	 */
 	public function addImage(Request $request, LoggerInterface $logger) {
 		$uploadedFile = $request->files->get('file');
-		$destination = $this->getParameter('kernel.project_dir').'/public/uploads';
+
+		$target = '';
+		if ($_SERVER['APP_ENV'] !== 'prod') {
+			$target = $this->getParameter('kernel.project_dir');
+		}
+
+		$destination = $target.'/public/uploads';
 
 		$allowedFiles = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'];
 
