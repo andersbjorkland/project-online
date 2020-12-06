@@ -10,6 +10,6 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
-/public/assets/css/*.css*
+/public/assets/css/*.css.map
 /public/uploads/
 /temp/
