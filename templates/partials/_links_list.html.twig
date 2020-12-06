@@ -1,9 +1,9 @@
-{# Requires including as such: include 'partials/_link_list.html.twig' with {'pages': number} #}
+{# Requires including as such: include 'partials/_link_list.html.twig' with {'posts': posts, 'pages': number} #}
 
 <ul class="list">
     {% for post in posts %}
         <li>
-            <a href="{{ path('post_show', {'slug': post.slug}) }}">
+            <a href="{{ path('post_view', {'slug': post.slug}) }}">
                 <h3>{{ post.title }}</h3>
                 <p>{{ post.publishAt|date("d/m/Y") }}</p>
             </a>
@@ -12,10 +12,10 @@
 </ul>
 
 {# Pagination #}
-{% if pages > 1 %}
+{# % if pages > 1 %}
     <div class="flex-row">
     {% for i in 1 .. pages %}
         <a href="{{ path('post_page', {'page': i}) }}">{{ i }}</a>
     {% endfor %}
     </div>
-{% endif %}
+{% endif %#}

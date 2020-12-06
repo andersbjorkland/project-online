@@ -40,6 +40,28 @@ class BlogPostRepository extends ServiceEntityRepository
 		;
 	}
 
+	/**
+	 * @return int Number of items in repository
+	 */
+	public function getCount()
+	{
+		$now = new DateTime("now");
+		$result = $this->createQueryBuilder('b')
+			->andWhere('b.publishAt < :now')
+			->andWhere('b.isDraft = 0')
+			->setParameter('now', $now)
+			->select('count(b.id)')
+			->getQuery()
+			->getSingleResult();
+		;
+		$count = 0;
+		foreach ($result as $c => $v) {
+			$count = $v;
+		}
+
+		return $count;
+	}
+
     // /**
     //  * @return BlogPost[] Returns an array of BlogPost objects
     //  */

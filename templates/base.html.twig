@@ -12,7 +12,14 @@
                 {{ message }}
             </div>
         {% endfor %}
-        {% block body %}{% endblock %}
+
+        <div class="main-content">
+            {% block body %}{% endblock %}
+        </div>
+        <div class="sidebar">
+            {% block sidebar %}{% endblock %}
+        </div>
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>

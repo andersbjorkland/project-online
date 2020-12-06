@@ -1,20 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Anders Björkland - Web Developer{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <section class="hero">
+        <h1>I'm Anders</h1>
+        <p>I make <span class="ceris">unique</span> and <span class="blue">effective</span> websites</p>
+    </section>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/abjor/code/playground/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/abjor/code/playground/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <section class="call-to-action">
+        <p>I build brand identity with design and code.</p>
+        <p>Make your visitors your next customers!</p>
+        <a href="#">Browse my projects</a>
+    </section>
 {% endblock %}
+
+{% block sidebar %}
+    {% include 'partials/_links_list.html.twig' with {'posts': posts, 'pages': pages} %}
+{% endblock %}
+
