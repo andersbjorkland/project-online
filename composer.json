@@ -64,6 +64,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "move-public": [
+            "App\\Utility\\ProdStructure::movePublicContent"
         ]
     },
     "conflict": {
