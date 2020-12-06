@@ -65,6 +65,16 @@ class BlogPost
      */
     private $categories;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $permanentSlug;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -194,6 +204,30 @@ class BlogPost
         if ($this->categories->removeElement($category)) {
 	        $category->removeBlogPost($this);
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getPermanentSlug(): ?string
+    {
+        return $this->permanentSlug;
+    }
+
+    public function setPermanentSlug(string $permanentSlug): self
+    {
+        $this->permanentSlug = $permanentSlug;
 
         return $this;
     }

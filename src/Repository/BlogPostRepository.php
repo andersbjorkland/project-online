@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\BlogPost;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -18,6 +19,26 @@ class BlogPostRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, BlogPost::class);
     }
+
+	/**
+	 * @return BlogPost[] Returns an array of BlogPost objects
+	 */
+	public function getLatestPaginated($page = 1, $limit = 10)
+	{
+		$offset =($page - 1) * $limit;
+		$now = new DateTime("now");
+		return $this->createQueryBuilder('b')
+			->select()
+            ->andWhere('b.publishAt < :now')
+			->andWhere('b.isDraft = 0')
+            ->setParameter('now', $now)
+            ->orderBy('b.publishAt', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+		;
+	}
 
     // /**
     //  * @return BlogPost[] Returns an array of BlogPost objects
