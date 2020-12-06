@@ -12,7 +12,7 @@ class ProdStructure {
 	 *
 	 * Credit to https://gist.github.com/baamenabar/f0ee62fd42fed31b60ce for basic structure of move-logic.
 	 */
-	public static function movePublicContent($args, $folder="./public/example", $targetSubfolder="")
+	public static function movePublicContent($args, $folder="./public/", $targetSubfolder="")
 	{
 		// move to public folder if on PROD server.
 		$src = '' . $folder;
