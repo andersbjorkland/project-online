@@ -7,7 +7,7 @@
             {{ blogPost.publishAt | date }}
             <div class="flex-row">
             {% for category in blogPost.categories %}
-                <a href="#">category.name</a>
+                <a href="#">{{ category.name }}</a>
             {% endfor %}
             </div>
         </div>

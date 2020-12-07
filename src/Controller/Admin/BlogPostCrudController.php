@@ -3,13 +3,16 @@
 namespace App\Controller\Admin;
 
 use App\Entity\BlogPost;
+use App\Entity\Category;
+use App\Form\CategoryType;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -28,17 +31,31 @@ class BlogPostCrudController extends AbstractCrudController
 	public function configureFields(string $pageName): iterable
     {
 	    return [
+	    	Field::new('id')->hideOnForm(),
 		    TextField::new('title'),
 		    TextareaField::new('summary'),
 		    TextEditorField::new('content')->addCssClass('blog-text'),
 		    DateTimeField::new('publishAt'),
 		    BooleanField::new('isDraft'),
-		    AssociationField::new('categories'),
+		    CollectionField::new('categories')
+		                   ->allowAdd()
+		                   ->allowDelete()
+		                   ->setEntryType(CategoryType::class)
 	    ];
     }
 
     public function persistEntity( EntityManagerInterface $entityManager, $entityInstance ): void {
-    	$entityInstance->setSlug(
+
+	    $categoryRepository = $entityManager->getRepository(Category::class);
+	    foreach ($entityInstance->getCategories() as $category) {
+		    $tempCategory = $categoryRepository->findOneBy( [ "name" => $category->getName() ] );
+		    if ( $tempCategory ) {
+			    $entityInstance->removeCategory( $category );
+			    $entityInstance->addCategory( $tempCategory );
+		    }
+	    }
+
+		    $entityInstance->setSlug(
     		$entityInstance->getPublishAt()->format('Y/m/d/') .
 		    rawurlencode($entityInstance->getTitle())
         );
@@ -51,7 +68,17 @@ class BlogPostCrudController extends AbstractCrudController
     }
 
     public function updateEntity( EntityManagerInterface $entityManager, $entityInstance ): void {
-	    $entityInstance->setSlug(
+	    $categoryRepository = $entityManager->getRepository(Category::class);
+	    foreach ($entityInstance->getCategories() as $category) {
+		    $tempCategory = $categoryRepository->findOneBy(["name" => $category->getName()]);
+		    if ($tempCategory) {
+		    	$entityInstance->removeCategory($category);
+		    	$entityInstance->addCategory($tempCategory);
+		    }
+
+	    }
+
+    	$entityInstance->setSlug(
 		    $entityInstance->getPublishAt()->format('Y/m/d/') .
 		    rawurlencode($entityInstance->getTitle())
 	    );

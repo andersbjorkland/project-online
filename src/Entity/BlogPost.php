@@ -61,7 +61,7 @@ class BlogPost
     private $summary;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="blogPosts")
+     * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="blogPosts", cascade={"persist"})
      */
     private $categories;
 
@@ -231,5 +231,10 @@ class BlogPost
 
         return $this;
     }
+
+	public function __toString(): string {
+		return $this->title . " - " . $this->getCreatedAt()->format("Y-m-d h:m:s");
+	}
+
 
 }
