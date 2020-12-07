@@ -1,1 +1,21 @@
+
+// Colors
+$lighterPink: #FAEDFC;
+$lightPink: #F5C7FC;
+$pink:#FC60C5;
+
+@import "header";
 @import "blog";
+
+
+// global
+
+body {
+  overflow-x: hidden;
+  margin: 0;
+}
+
+.assistive-text {
+  position: absolute;
+  left: -4000px;
+}
