@@ -36,11 +36,19 @@
             </div>
         {% endfor %}
 
-        <div class="main-content">
-            {% block body %}{% endblock %}
-        </div>
-        <div class="sidebar">
-            {% block sidebar %}{% endblock %}
+
+        <div class="content-wrapper">
+            <div class="flexible-container">
+                <div class="main-content">
+                    {% block body %}{% endblock %}
+                </div>
+                {% if sidebar is defined %}
+                <div class="sidebar">
+                    <h2>HEllo!</h2>
+                    {% block sidebar %}{% endblock %}
+                </div>
+                {% endif %}
+            </div>
         </div>
 
         {% block javascripts %}{% endblock %}

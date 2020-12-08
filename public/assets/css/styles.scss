@@ -1,11 +1,9 @@
 
-// Colors
-$lighterPink: #FAEDFC;
-$lightPink: #F5C7FC;
-$pink:#FC60C5;
-
+@import "colors";
 @import "header";
 @import "blog";
+@import "mixins";
+
 
 
 // global
@@ -14,6 +12,23 @@ body {
   overflow-x: hidden;
   margin: 0;
 }
+
+.content-wrapper {
+  display: flex;
+  justify-content: center;
+
+  & > * {
+    @include min-max-width;
+  }
+}
+.flexible-container {
+
+}
+
+.main-content {
+
+}
+
 
 .assistive-text {
   position: absolute;

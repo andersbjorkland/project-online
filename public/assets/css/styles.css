@@ -71,6 +71,16 @@ body {
   margin: 0;
 }
 
+.content-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.content-wrapper > * {
+  max-width: 80rem;
+  min-width: 20rem;
+  width: 75vw;
+}
+
 .assistive-text {
   position: absolute;
   left: -4000px;
