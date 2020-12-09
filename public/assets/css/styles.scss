@@ -1,6 +1,7 @@
 
 @import "colors";
 @import "header";
+@import "headers";
 @import "blog";
 @import "mixins";
 
@@ -11,11 +12,14 @@
 body {
   overflow-x: hidden;
   margin: 0;
+
+  font-family: Raleway, 'sans-serif';
 }
 
 .content-wrapper {
   display: flex;
   justify-content: center;
+  overflow-x: hidden;
 
   & > * {
     @include min-max-width;
@@ -26,7 +30,14 @@ body {
 }
 
 .main-content {
+}
 
+code {
+  overflow-x: auto;
+}
+
+ul {
+  overflow-x: auto;
 }
 
 
