@@ -1,0 +1,50 @@
+@use "colors";
+@use "mixins";
+
+:root * {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  margin: 0;
+
+  font-family: Raleway, 'sans-serif';
+  color: colors.$darkGrey;
+}
+
+.content-wrapper {
+  padding: 2rem 0;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+
+  & > * {
+    @include mixins.min-max-width;
+  }
+}
+.flexible-container {
+
+}
+
+.main-content {
+}
+
+code {
+  overflow-x: auto;
+}
+
+time {
+  font-family: monospace;
+}
+
+ul {
+  overflow-x: auto;
+}
+
+
+.assistive-text {
+  position: absolute;
+  left: -4000px;
+}

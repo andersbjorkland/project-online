@@ -1,3 +1,48 @@
+.mt-auto {
+  margin-top: auto;
+}
+
+:root * {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  margin: 0;
+  font-family: Raleway, "sans-serif";
+  color: #323232;
+}
+
+.content-wrapper {
+  padding: 2rem 0;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+}
+.content-wrapper > * {
+  max-width: 80rem;
+  min-width: 20rem;
+  width: 75vw;
+}
+
+code {
+  overflow-x: auto;
+}
+
+time {
+  font-family: monospace;
+}
+
+ul {
+  overflow-x: auto;
+}
+
+.assistive-text {
+  position: absolute;
+  left: -4000px;
+}
+
 nav {
   background-color: #FAEDFC;
   width: 100%;
@@ -75,7 +120,7 @@ nav .nav-container .link-img {
     display: initial;
     color: white;
     background-color: #FC60C5;
-    width: 5.4rem;
+    width: 5rem;
     padding: 0.1rem 0;
     text-align: center;
     border-bottom-left-radius: 0.2rem;
@@ -86,38 +131,49 @@ h1, h2, h3, h4, h5, h6 {
   font-family: Sniglet, "sans-serif";
 }
 
-.blog-text .ea-text-editor-wrapper {
+.blog__summary h1, .blog__summary h2, .blog__summary h3 {
+  margin-bottom: 0;
+}
+.blog__summary p {
+  margin: 0;
+}
+.blog__summary p:nth-child(3) {
+  margin-top: 0.5rem;
+}
+.blog__text .ea-text-editor-wrapper {
   min-height: 18rem;
 }
-
-body {
-  overflow-x: hidden;
-  margin: 0;
-  font-family: Raleway, "sans-serif";
+.blog__link {
+  color: #FC60C5;
 }
 
-.content-wrapper {
+.card {
+  width: 16rem;
+  height: 20rem;
+  padding: 1rem;
+  justify-self: center;
+  box-shadow: 4px 4px 12px #FAEDFC;
   display: flex;
-  justify-content: center;
-  overflow-x: hidden;
+  flex-direction: column;
 }
-.content-wrapper > * {
-  max-width: 80rem;
-  min-width: 20rem;
-  width: 75vw;
-}
-
-code {
-  overflow-x: auto;
+.card__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 1rem;
 }
 
-ul {
-  overflow-x: auto;
+.button, a.button {
+  text-decoration: none;
+  color: white;
+  background-color: #FC60C5;
+  padding: 0.2rem;
+  border-radius: 0.2rem;
 }
 
-.assistive-text {
-  position: absolute;
-  left: -4000px;
+.flex-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.5rem;
 }
 
 /*# sourceMappingURL=styles.css.map */

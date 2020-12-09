@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <article>
+    <article class="blog__container">
         <h1>{{ blogPost.title }}</h1>
-        <div class="post-data">
+        <div class="blog__meta">
             {{ blogPost.publishAt | date }}
             <div class="flex-row">
             {% for category in blogPost.categories %}
@@ -11,7 +11,7 @@
             {% endfor %}
             </div>
         </div>
-        <div class="post-content">
+        <div class="blog__content">
             {{ blogPost.content | raw }}
         </div>
     </article>

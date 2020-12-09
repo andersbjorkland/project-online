@@ -1,0 +1,12 @@
+@use "colors";
+
+.button, a.button {
+  text-decoration: none;
+
+  color: white;
+  background-color: colors.$pink;
+
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+
+}

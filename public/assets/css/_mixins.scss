@@ -1,5 +1,7 @@
+@use "dimensions";
+
 @mixin min-max-width {
-  max-width: 80rem;
-  min-width: 20rem;
-  width: 75vw;
+  max-width: dimensions.$maxWidth;
+  min-width: dimensions.$minWidth;
+  width: dimensions.$width;
 }

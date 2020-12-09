@@ -1,8 +1,26 @@
-.blog {
+@import "colors";
 
-  &-text {
+.blog {
+  &__summary {
+    h1, h2, h3 {
+      margin-bottom: 0;
+    }
+    p {
+      margin: 0;
+
+      &:nth-child(3) {
+        margin-top: 0.5rem;
+      }
+    }
+  }
+
+  &__text {
     .ea-text-editor-wrapper {
       min-height: 18rem;
     }
+  }
+
+  &__link {
+    color: $pink;
   }
 }

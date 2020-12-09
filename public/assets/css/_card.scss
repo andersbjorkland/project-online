@@ -1,0 +1,19 @@
+@use "colors";
+
+.card {
+  width: 16rem;
+  height: 20rem;
+  padding: 1rem;
+  justify-self: center;
+
+  box-shadow: 4px 4px 12px colors.$lighterPink;
+
+  display: flex;
+  flex-direction: column;
+
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 1rem;
+  }
+}

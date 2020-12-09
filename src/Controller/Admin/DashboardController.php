@@ -4,7 +4,6 @@ namespace App\Controller\Admin;
 
 use App\Entity\BlogPost;
 use App\Entity\Category;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -19,10 +18,6 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
         return parent::index();
-    }
-
-    public function configureAssets(): Assets {
-	    return Assets::new()->addCssFile('assets/css/styles.css');
     }
 
 	public function configureDashboard(): Dashboard

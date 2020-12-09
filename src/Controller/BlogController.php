@@ -13,10 +13,11 @@ class BlogController extends AbstractController
     /**
      * @Route("/blog", name="blog")
      */
-    public function index(): Response
+    public function index(BlogPostRepository $blogPostRepository): Response
     {
+    	$latestPosts = $blogPostRepository->getLatestPaginated(1, 3);
         return $this->render('blog/index.html.twig', [
-            'controller_name' => 'BlogController',
+        	'posts' => $latestPosts,
         ]);
     }
 
