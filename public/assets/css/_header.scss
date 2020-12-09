@@ -56,8 +56,8 @@ nav {
 @media screen and (min-width: 600px)  {
   nav {
     .logo-container {
-
-      padding: 1rem;
+      margin-left: 0;
+      padding: 1rem 1rem 1rem 0;
 
       #logo-img {
         display: block;
@@ -68,6 +68,7 @@ nav {
 
     .nav-container {
       display: flex;
+      margin-right: 0;
 
       .links-container {
         height: 4rem;

@@ -1,4 +1,5 @@
-@import "colors";
+@use "colors";
+@use "mixins";
 
 .blog {
   &__summary {
@@ -14,6 +15,35 @@
     }
   }
 
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    figure {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin: 1rem 0;
+    }
+
+    img {
+      max-width: 100%;
+      width: auto;
+      height: 20rem;
+    }
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+
+    h1, h2 {
+      margin-bottom: 0;
+    }
+  }
+
   &__text {
     .ea-text-editor-wrapper {
       min-height: 18rem;
@@ -21,6 +51,6 @@
   }
 
   &__link {
-    color: $pink;
+    color: colors.$pink;
   }
 }

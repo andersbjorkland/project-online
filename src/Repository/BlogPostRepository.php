@@ -6,6 +6,7 @@ use App\Entity\BlogPost;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 
 /**
  * @method BlogPost|null find($id, $lockMode = null, $lockVersion = null)
@@ -60,6 +61,61 @@ class BlogPostRepository extends ServiceEntityRepository
 		}
 
 		return $count;
+	}
+
+	/**
+	 * @param DateTime $date
+	 *
+	 * @return BlogPost[] Returns an array of BlogPost objects
+	 */
+	public function getByMonth(DateTime $date)
+	{
+		try {
+			$month = $date->format('m');
+			$year = $date->format('Y');
+			$date1 = new DateTime("$year/$month/1");
+			$date2 = new DateTime("$year/$month/1");
+			$date2->modify('+1 month');
+
+			return $this->createQueryBuilder('b')
+			            ->andWhere('b.publishAt >= :date1')
+			            ->andWHere('b.publishAt < :date2')
+			            ->setParameter('date1', $date1)
+			            ->setParameter('date2', $date2)
+			            ->orderBy('b.publishAt', 'DESC')
+			            ->getQuery()
+			            ->getResult()
+				;
+		} catch ( Exception $e ) {
+			return null;
+		}
+	}
+
+	/**
+	 * @param DateTime $date
+	 *
+	 * @return BlogPost[] Returns an array of BlogPost objects
+	 */
+	public function getByYear(DateTime $date)
+	{
+		try {
+			$year = $date->format('Y');
+			$date1 = new DateTime("$year/01/01");
+			$date2 = new DateTime("$year/01/01");
+			$date2->modify('+1 year');
+
+			return $this->createQueryBuilder('b')
+			            ->andWhere('b.publishAt >= :date1')
+			            ->andWHere('b.publishAt < :date2')
+			            ->setParameter('date1', $date1)
+			            ->setParameter('date2', $date2)
+			            ->orderBy('b.publishAt', 'DESC')
+			            ->getQuery()
+			            ->getResult()
+				;
+		} catch ( Exception $e ) {
+			return null;
+		}
 	}
 
     // /**

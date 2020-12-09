@@ -1,31 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BlogController!{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block body %}
-{% if posts is defined %}
-    <div class="card__container">
-    {% for post in posts %}
-        <div class="card blog__summary">
-            <h2>{{ post.title }}</h2>
-            <time>{{ post.publishAt | date }}</time>
-            <p>
-            {% if post.summary is defined %}
-                {{ post.summary }}
-            {% else %}
-                {{ post.content|slice(0, 100) }}
-            {% endif %}
-            </p>
-            <p>
-                <a class="blog__link" href="{{ path('post_view', {'slug' : post.slug}) }}">Read more!</a>
-            </p>
-            <div class="flex-row mt-auto">
-                {% for category in post.categories %}
-                    <a href="#" class="button">{{ category.name }}</a>
-                {% endfor %}
+<div class="blog__wrapper">
+    <h1>{{ title }}</h1>
+    {% if showBlogIntro is defined %}
+        <p>
+            I write about programming practices, processes, design, and more. You can explore
+            posts by category, or just see what I've written about lately, right here on this page.
+            If you want to see me write about a particular subject you can reach out to me through my
+            <a href="#">contact form</a>.
+        </p>
+    {% endif %}
+
+    {% if posts is defined %}
+        <div class="card__container">
+        {% for post in posts %}
+            <div class="card blog__summary">
+                <h2>{{ post.title }}</h2>
+                <time>{{ post.publishAt | date }}</time>
+                <p>
+                {% if post.summary is defined and post.summary|length > 0 %}
+                    {{ post.summary|slice(0, 150) }}
+                    {% if post.summary|length > 150 %}
+                        [...]
+                    {% endif %}
+                {% else %}
+                    {{ post.content|slice(0, 150)|striptags }}
+                    {% if post.content|length > 150 %}
+                        [...]
+                    {% endif %}
+                {% endif %}
+                </p>
+                <p>
+                    <a class="blog__link" href="{{ path('post_view', {'slug' : post.slug}) }}">Read more!</a>
+                </p>
+                <div class="flex-row mt-auto">
+                    {% for category in post.categories %}
+                        <a href="#" class="button">{{ category.name }}</a>
+                    {% endfor %}
+                </div>
             </div>
+        {% endfor %}
         </div>
-    {% endfor %}
-    </div>
-{% endif %}
+    {% endif %}
+</div>
 {% endblock %}

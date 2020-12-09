@@ -2,17 +2,17 @@
 
 {% block body %}
     <article class="blog__container">
-        <h1>{{ blogPost.title }}</h1>
-        <div class="blog__meta">
-            {{ blogPost.publishAt | date }}
-            <div class="flex-row">
-            {% for category in blogPost.categories %}
-                <a href="#">{{ category.name }}</a>
-            {% endfor %}
-            </div>
+        <div class="blog__header">
+            <h1>{{ blogPost.title }}</h1>
+            <time>{{ blogPost.publishAt | date }}</time>
         </div>
         <div class="blog__content">
             {{ blogPost.content | raw }}
+        </div>
+        <div class="flex-row">
+            {% for category in blogPost.categories %}
+                <a href="#" class="button">{{ category.name }}</a>
+            {% endfor %}
         </div>
     </article>
     <script src="{{ asset('assets/js/captionsToAlt.js') }}"></script>

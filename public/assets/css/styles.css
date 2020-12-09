@@ -89,7 +89,8 @@ nav .nav-container .link-img {
 
 @media screen and (min-width: 600px) {
   nav .logo-container {
-    padding: 1rem;
+    margin-left: 0;
+    padding: 1rem 1rem 1rem 0;
   }
   nav .logo-container #logo-img {
     display: block;
@@ -98,6 +99,7 @@ nav .nav-container .link-img {
   }
   nav .nav-container {
     display: flex;
+    margin-right: 0;
   }
   nav .nav-container .links-container {
     height: 4rem;
@@ -139,6 +141,30 @@ h1, h2, h3, h4, h5, h6 {
 }
 .blog__summary p:nth-child(3) {
   margin-top: 0.5rem;
+}
+.blog__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.blog__container figure {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 1rem 0;
+}
+.blog__container img {
+  max-width: 100%;
+  width: auto;
+  height: 20rem;
+}
+.blog__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.blog__header h1, .blog__header h2 {
+  margin-bottom: 0;
 }
 .blog__text .ea-text-editor-wrapper {
   min-height: 18rem;
