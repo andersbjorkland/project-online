@@ -38,7 +38,7 @@
                 </p>
                 <div class="flex-row mt-auto">
                     {% for category in post.categories %}
-                        <a href="#" class="button">{{ category.name }}</a>
+                        <a href="{{ path('blog_category', {'name': category}) }}" class="button">{{ category.name }}</a>
                     {% endfor %}
                 </div>
             </div>

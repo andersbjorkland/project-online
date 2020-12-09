@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\BlogPost;
 use App\Repository\BlogPostRepository;
+use App\Repository\CategoryRepository;
 use DateTime;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,6 +25,25 @@ class BlogController extends AbstractController
 	        'showBlogIntro' => true
         ]);
     }
+
+	/**
+	 * @Route("blog/category/{name}", name="blog_category")
+	 */
+	public function postsByCategory(string $name, CategoryRepository $categoryRepository)
+	{
+		$category = $categoryRepository->findOneBy(["name" => $name]);
+		if ($category) {
+			$posts = $category->getBlogPosts();
+			return $this->render('blog/index.html.twig', [
+				'title' => "Blog by category: $name",
+				'posts' => $posts,
+				'showBlogIntro' => true
+			]);
+		} else {
+			$this->addFlash("notice", "The category '$name' could not be found.");
+			return $this->redirectToRoute('blog');
+		}
+	}
 
 	/**
 	 * @Route("/blog/{date}", name="blog_date", requirements={"date"=".+"})

@@ -11,7 +11,7 @@
         </div>
         <div class="flex-row">
             {% for category in blogPost.categories %}
-                <a href="#" class="button">{{ category.name }}</a>
+                <a href="{{ path('blog_category', {'name': category}) }}" class="button">{{ category.name }}</a>
             {% endfor %}
         </div>
     </article>
