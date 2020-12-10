@@ -12,6 +12,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectRepository::class)
+ * @Vich\Uploadable
  */
 class Project
 {
@@ -44,6 +45,7 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @var string
      */
     private $thumbnail;
 
@@ -165,9 +167,9 @@ class Project
          	}
 
 	/**
-	 * @param mixed $thumbnailFile
+	 * @param mixed $imageFile
 	 */
-	public function setThumbnailFile( $thumbnailFile ): void {
+	public function setThumbnailFile($thumbnailFile): void {
          		$this->thumbnailFile = $thumbnailFile;
 
          		if ($thumbnailFile) {
