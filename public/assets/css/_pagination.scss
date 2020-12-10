@@ -1,0 +1,12 @@
+@use "colors";
+
+.pagination {
+  &>a {
+    color: colors.$pink;
+    text-decoration: none;
+
+    &.active {
+      color: colors.$darkGrey;
+    }
+  }
+}

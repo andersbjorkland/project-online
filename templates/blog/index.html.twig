@@ -45,5 +45,18 @@
         {% endfor %}
         </div>
     {% endif %}
+    {% if slugName is defined %}
+        <div class="pagination">
+        {% include 'partials/_pagination.html.twig' with
+            {
+                'slugName': slugName,
+                'slugValue': slugValue,
+                'pathName': pathName,
+                'currentPage': currentPage,
+                'numOfPages': numOfPages
+            }
+        %}
+        </div>
+    {% endif %}
 </div>
 {% endblock %}

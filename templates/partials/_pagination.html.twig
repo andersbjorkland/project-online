@@ -1,0 +1,52 @@
+{#
+    Variables:
+    - slugName
+    - slugValue
+    - pathName (name for Controller route)
+    - currentPage
+    - numOfPages
+#}
+{% if numOfPages > 1 %}
+    {% if 1 == currentPage %}
+        <a class="active" href="{{ path(pathName, { (slugName): (slugValue), page: 1}) }}">1</a>
+    {% else %}
+        <a href="{{ path(pathName, { (slugName): (slugValue), page: 1}) }}">1</a>
+    {% endif %}
+
+
+    {% if (currentPage - 2) < 2 %}
+        {% set floorLimit = 2 %}
+    {% else %}
+        {% set floorLimit = (currentPage - 2) %}
+    {% endif %}
+
+    {% if (currentPage + 2) > numOfPages %}
+        {% set upperLimit = numOfPages %}
+    {% else %}
+        {% set upperLimit = (currentPage + 2) %}
+    {% endif %}
+
+    {% if floorLimit > 2 %}
+        ...
+    {% endif %}
+
+    {% if numOfPages > 1 %}
+        {% for page in floorLimit .. upperLimit %}
+            {% if page == currentPage %}
+                <a class="active" href="{{ path(pathName, { (slugName): (slugValue), page: (page)}) }}">{{ page }}</a>
+            {% else %}
+                <a href="{{ path(pathName, { (slugName): (slugValue), page: (page)}) }}">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    {% set upperControl = numOfPages - 1 %}
+    {% if upperLimit < upperControl %}
+        ...
+    {% endif %}
+    {% if upperLimit < numOfPages %}
+        <a href="{{ path(pathName, { (slugName): (slugValue), page: (numOfPages)}) }}">{{ numOfPages }}</a>
+    {% endif %}
+
+
+{% endif %}

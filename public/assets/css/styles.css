@@ -183,6 +183,7 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
 }
 .card__container {
+  margin: 2rem 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   gap: 1rem;
@@ -200,6 +201,14 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-wrap: wrap;
   gap: 0.2rem 0.5rem;
+}
+
+.pagination > a {
+  color: #FC60C5;
+  text-decoration: none;
+}
+.pagination > a.active {
+  color: #323232;
 }
 
 /*# sourceMappingURL=styles.css.map */

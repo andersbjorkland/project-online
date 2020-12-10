@@ -27,17 +27,38 @@ class BlogController extends AbstractController
     }
 
 	/**
-	 * @Route("blog/category/{name}", name="blog_category")
+	 * @Route("blog/category/{name}/{page}", name="blog_category")
 	 */
-	public function postsByCategory(string $name, CategoryRepository $categoryRepository)
+	public function postsByCategory(
+		string $name,
+		CategoryRepository $categoryRepository,
+		BlogPostRepository $blogPostRepository,
+		int $page=1
+	): Response
 	{
+		$limit = $this->getParameter("items_per_page");
 		$category = $categoryRepository->findOneBy(["name" => $name]);
 		if ($category) {
-			$posts = $category->getBlogPosts();
+			$numOfPages = $blogPostRepository->getByCategoryCountPages($category, $limit);
+			$posts = $blogPostRepository->getByCategory($category, $page, $limit);
+
+			/*
+			    'slugName': slugName,
+                'slugValue': slugValue,
+                'pathName': pathName,
+                'currentPage': currentPage,
+                'numOfPages': numOfPages
+			 */
+
 			return $this->render('blog/index.html.twig', [
 				'title' => "Blog by category: $name",
 				'posts' => $posts,
-				'showBlogIntro' => true
+				'showBlogIntro' => true,
+				'slugName' => 'name',
+				'slugValue' => $name,
+				'pathName' => 'blog_category',
+				'currentPage' => $page,
+				'numOfPages' => $numOfPages,
 			]);
 		} else {
 			$this->addFlash("notice", "The category '$name' could not be found.");
@@ -46,53 +67,182 @@ class BlogController extends AbstractController
 	}
 
 	/**
-	 * @Route("/blog/{date}", name="blog_date", requirements={"date"=".+"})
+	 * @Route("/blog/date/{year}", name="blog_year")
 	 */
-	public function postsByDate(string $date, BlogPostRepository $blogPostRepository): Response {
+	public function postsByYear(int $year, BlogPostRepository $blogPostRepository): Response {
+		$page = 1;
 		$posts = null;
-		$string = $date;
+		$string = $year;
+		$date = $year;
 		$errors = [];
 		$title = "Blog";
+		$limit = $this->getParameter("items_per_page");
+		$numOfPages = 1;
 
 		// Posts by year:
-		if (strlen($date) === 4 || strlen($date) === 5) {
-			try {
-				if (strlen($date) === 4) {
-					$date .= '/';
-				}
-				$date .= '01/01';
+		try {
+			$date .= '/';
+			$date .= '01/01';
 
-				$dateTime = new DateTime( $date );
-				$posts = $blogPostRepository->getByYear($dateTime);
-				$title .= " by year: " . $dateTime->format('Y');
-			} catch ( Exception $e ) {
-				$errors[] = $e;
-			}
-		}
-
-		// Posts by month:
-		if (strlen($date) >= 6 && strlen($date) <= 8) {
-			try {
-				if (strlen($date) === 7) {
-					$date .= '/';
-				}
-				$date .= '1';
-
-				$dateTime = new DateTime( $date );
-				$posts = $blogPostRepository->getByMonth($dateTime);
-				$title .= " by month: " . $dateTime->format('M')
-				          . " (" . $dateTime->format('Y') . " )";
-
-			} catch ( Exception $e ) {
-				$errors[] = $e;
-			}
+			$dateTime = new DateTime( $date );
+			$posts = $blogPostRepository->getByYear($dateTime, $page, $limit);
+			$numOfPages = $blogPostRepository->getByYearCountPages($dateTime, $limit);
+			$title .= " by year: " . $dateTime->format('Y');
+		} catch ( Exception $e ) {
+			$errors[] = $e;
 		}
 
 		if ($posts) {
 			return $this->render('blog/index.html.twig', [
 				'title' => $title,
 				'posts' => $posts,
-				'showBlogIntro' => true
+				'showBlogIntro' => true,
+				'slugName' => 'year',
+				'slugValue' => $string,
+				'pathName' => 'blog_year_paginated',
+				'currentPage' => $page,
+				'numOfPages' => $numOfPages,
+			]);
+		}
+
+		if ($errors) {
+			$this->addFlash("error", "Something went wrong.");
+			return $this->redirectToRoute('blog');
+		}
+
+		// Posts by slug
+		return $this->viewFromSlug($string, $blogPostRepository);
+	}
+
+	/**
+	 * @Route("/blog/date/{year}/p={page}", name="blog_year_paginated")
+	 */
+	public function postsByYearPaginated(int $year, BlogPostRepository $blogPostRepository, int $page = 1): Response {
+		$posts = null;
+		$string = $year;
+		$errors = [];
+		$title = "Blog";
+		$limit = $this->getParameter("items_per_page");
+		$numOfPages = 1;
+
+		// Posts by year:
+		try {
+			$date = "$year/01/01";
+
+			$dateTime = new DateTime( $date );
+			$posts = $blogPostRepository->getByYear($dateTime, $page, $limit);
+			$numOfPages = $blogPostRepository->getByYearCountPages($dateTime, $limit);
+			$title .= " by year: " . $dateTime->format('Y');
+		} catch ( Exception $e ) {
+			$errors[] = $e;
+		}
+
+		if ($posts) {
+			return $this->render('blog/index.html.twig', [
+				'title' => $title,
+				'posts' => $posts,
+				'showBlogIntro' => true,
+				'slugName' => 'year',
+				'slugValue' => $string,
+				'pathName' => 'blog_year_paginated',
+				'currentPage' => $page,
+				'numOfPages' => $numOfPages,
+			]);
+		}
+
+		if ($errors) {
+			$this->addFlash("error", "No posts were found for $string.");
+			return $this->redirectToRoute('blog');
+		}
+
+		// Posts by slug
+		return $this->viewFromSlug($string, $blogPostRepository);
+	}
+
+	/**
+	 * @Route("/blog/date/{date}", name="blog_month", requirements={"date"=".+"})
+	 */
+	public function postsByMonth(string $date, BlogPostRepository $blogPostRepository): Response {
+		$page = 1;
+		$posts = null;
+		$string = $date;
+		$errors = [];
+		$title = "Blog";
+		$limit = $this->getParameter("items_per_page");
+		$numOfPages = 1;
+
+		// Posts by month:
+		try {
+			$date .= "/1";
+
+			$dateTime = new DateTime( $date );
+			$posts = $blogPostRepository->getByMonth($dateTime, $page, $limit);
+			$numOfPages = $blogPostRepository->getByMonthCountPages($dateTime, $limit);
+			$title .= " by month: " . $dateTime->format('M')
+			          . " (" . $dateTime->format('Y') . " )";
+
+		} catch ( Exception $e ) {
+			$errors[] = $e;
+		}
+
+		if ($posts) {
+			return $this->render('blog/index.html.twig', [
+				'title' => $title,
+				'posts' => $posts,
+				'showBlogIntro' => true,
+				'slugName' => 'date',
+				'slugValue' => $string,
+				'pathName' => 'blog_month_paginated',
+				'currentPage' => $page,
+				'numOfPages' => $numOfPages,
+			]);
+		}
+
+		if ($errors) {
+			$this->addFlash("error", "No posts were found $string.");
+			return $this->redirectToRoute('blog');
+		}
+
+		// Posts by slug
+		return $this->viewFromSlug($string, $blogPostRepository);
+	}
+
+	/**
+	 * @Route("/blog/date/{date}/p={page}", name="blog_month_paginated", requirements={"date"=".+"})
+	 */
+	public function postsByMonthPaginated(string $date, BlogPostRepository $blogPostRepository, int $page = 1): Response {
+		$posts = null;
+		$errors = [];
+		$title = "Blog";
+		$limit = $this->getParameter("items_per_page");
+		$numOfPages = 1;
+		$string = $date;
+
+		// Posts by month:
+		try {
+
+			$date .= "/1";
+
+			$dateTime = new DateTime( $date );
+			$posts = $blogPostRepository->getByMonth($dateTime, $page, $limit);
+			$numOfPages = $blogPostRepository->getByMonthCountPages($dateTime, $limit);
+			$title .= " by month: " . $dateTime->format('M')
+			          . " (" . $dateTime->format('Y') . " )";
+
+		} catch ( Exception $e ) {
+			$errors[] = $e;
+		}
+
+		if ($posts) {
+			return $this->render('blog/index.html.twig', [
+				'title' => $title,
+				'posts' => $posts,
+				'showBlogIntro' => true,
+				'slugName' => 'date',
+				'slugValue' => $string,
+				'pathName' => 'blog_month_paginated',
+				'currentPage' => $page,
+				'numOfPages' => $numOfPages,
 			]);
 		}
 
@@ -112,7 +262,6 @@ class BlogController extends AbstractController
 	 */
 	public function viewFromSlug(string $slug, BlogPostRepository $blogPostRepository): Response
 	{
-
 		$blogPost = $blogPostRepository->findOneBy(["slug" => $slug]);
 
 		if ($blogPost === null) {
@@ -128,7 +277,8 @@ class BlogController extends AbstractController
 		$blogPost = $blogPostRepository->findOneBy(["permanentSlug" => $permanentSlug]);
 
 		if ($blogPost === null) {
-			return $this->redirectToRoute('blog', ["message" => "The blog post you were looking for could not be found"]);
+			$this->addFlash('error', $permanentSlug);
+			return $this->redirectToRoute('blog');
 		}
 
 		return $this->presentView($blogPost, $blogPostRepository);

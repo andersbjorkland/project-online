@@ -12,6 +12,7 @@
   flex-direction: column;
 
   &__container {
+    margin: 2rem 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
     gap: 1rem;
