@@ -30,7 +30,7 @@ class Category
     private $blogPosts;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Project::class, mappedBy="categories")
+     * @ORM\ManyToMany(targetEntity=Project::class, inversedBy="categories")
      */
     private $projects;
 
@@ -98,7 +98,6 @@ class Category
     {
         if (!$this->projects->contains($project)) {
             $this->projects[] = $project;
-            $project->addCategory($this);
         }
 
         return $this;

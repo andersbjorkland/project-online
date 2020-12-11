@@ -55,7 +55,7 @@ class Project
     private $thumbnailFile;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="projects")
+     * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="projects", cascade={"persist"})
      */
     private $categories;
 
@@ -63,6 +63,11 @@ class Project
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isDraft;
 
     public function __construct()
     {
@@ -147,6 +152,7 @@ class Project
     {
         if (!$this->categories->contains($category)) {
             $this->categories[] = $category;
+            $category->addProject($this);
         }
 
         return $this;
@@ -163,19 +169,19 @@ class Project
 	 * @return mixed
 	 */
 	public function getThumbnailFile() {
-         		return $this->thumbnailFile;
-         	}
+                  		return $this->thumbnailFile;
+                  	}
 
 	/**
 	 * @param mixed $imageFile
 	 */
 	public function setThumbnailFile($thumbnailFile): void {
-         		$this->thumbnailFile = $thumbnailFile;
-
-         		if ($thumbnailFile) {
-         			$this->updatedAt = new DateTime();
-	            }
-         	}
+                  		$this->thumbnailFile = $thumbnailFile;
+         
+                  		if ($thumbnailFile) {
+                  			$this->updatedAt = new DateTime();
+         	            }
+                  	}
 
     public function getUpdatedAt(): ?DateTimeInterface
     {
@@ -185,6 +191,18 @@ class Project
     public function setUpdatedAt(?DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getIsDraft(): ?bool
+    {
+        return $this->isDraft;
+    }
+
+    public function setIsDraft(bool $isDraft): self
+    {
+        $this->isDraft = $isDraft;
 
         return $this;
     }
