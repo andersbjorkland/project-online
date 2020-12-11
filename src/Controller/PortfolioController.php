@@ -22,7 +22,8 @@ class PortfolioController extends AbstractController
 		    $this->getParameter("app.path.thumbnails.prod");
 
         return $this->render('portfolio/index.html.twig', [
-        	'baseUrl' => $baseUrl,
+	        'page' => 'portfolio',
+	        'baseUrl' => $baseUrl,
             'projects' => $projects,
         ]);
     }

@@ -54,10 +54,6 @@ ul {
   left: -4000px;
 }
 
-.blue {
-  color: #6077FC;
-}
-
 nav {
   background-color: #FAEDFC;
   width: 100%;
@@ -101,8 +97,89 @@ nav .nav-container .link-img {
   height: 2.5rem;
   width: auto;
 }
+nav .active > .inner-container-link .change-fill {
+  fill: white;
+}
 
 @media screen and (min-width: 600px) {
+  #portfolio-link:hover .link-img {
+    animation: swing;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+  }
+
+  @keyframes swing {
+    20% {
+      transform: translate(0px, -5px);
+    }
+    30% {
+      transform: translate(0px, 0px);
+    }
+    40% {
+      transform: translate(0px, -4px);
+    }
+    50% {
+      transform: translate(0px, 0px);
+    }
+    60% {
+      transform: translate(0px, -3px);
+    }
+    70% {
+      transform: translate(0px, 0px);
+    }
+    80% {
+      transform: translate(0px, -1px);
+    }
+  }
+  #blog-link:hover .link-img {
+    animation: flip;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+  }
+
+  @keyframes flip {
+    30% {
+      transform: rotate(-10deg);
+    }
+    40% {
+      transform: rotate(-8deg);
+    }
+    50% {
+      transform: rotate(-10deg);
+    }
+    60% {
+      transform: rotate(-8deg);
+    }
+    70% {
+      transform: rotate(-10deg);
+    }
+  }
+  #about-link:hover #hand {
+    transform: translate(0px, 17.086px);
+    animation: wave;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes wave {
+    50% {
+      transform: translate(-4px, 22.086px) rotate(-10deg);
+    }
+  }
+  #admin-link:hover #crown {
+    animation: admin;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+  }
+
+  @keyframes admin {
+    50% {
+      fill: #60C5FC;
+    }
+  }
   nav .logo-container {
     margin-left: 0;
     padding: 1rem 1rem 1rem 0;
@@ -122,19 +199,21 @@ nav .nav-container .link-img {
     align-items: center;
     justify-content: center;
   }
+  nav .nav-container .links-container > .active {
+    background-color: #FC60C5;
+  }
   nav .nav-container .inner-container-link {
     position: relative;
   }
   nav .nav-container a.nav-link {
     border-radius: 0.2rem;
-    padding: 0.2rem 0.2rem 0 0.2rem;
+    padding: 0.5rem 0.2rem;
     width: 5rem;
     text-decoration: none;
     background-color: rgba(255, 255, 255, 0.6);
   }
   nav .nav-container .link-text {
     margin-top: 0.2rem;
-    display: initial;
     color: white;
     background-color: #FC60C5;
     width: 5rem;

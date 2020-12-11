@@ -20,7 +20,8 @@ class BlogController extends AbstractController
     {
     	$latestPosts = $blogPostRepository->getLatestPaginated(1, 3);
         return $this->render('blog/index.html.twig', [
-        	'title' => 'Blog',
+	        'page' => 'blog',
+	        'title' => 'Blog',
         	'posts' => $latestPosts,
 	        'showBlogIntro' => true
         ]);
@@ -42,15 +43,8 @@ class BlogController extends AbstractController
 			$numOfPages = $blogPostRepository->getByCategoryCountPages($category, $limit);
 			$posts = $blogPostRepository->getByCategory($category, $page, $limit);
 
-			/*
-			    'slugName': slugName,
-                'slugValue': slugValue,
-                'pathName': pathName,
-                'currentPage': currentPage,
-                'numOfPages': numOfPages
-			 */
-
 			return $this->render('blog/index.html.twig', [
+				'page' => 'blog',
 				'title' => "Blog by category: $name",
 				'posts' => $posts,
 				'showBlogIntro' => true,
@@ -94,6 +88,7 @@ class BlogController extends AbstractController
 
 		if ($posts) {
 			return $this->render('blog/index.html.twig', [
+				'page' => 'blog',
 				'title' => $title,
 				'posts' => $posts,
 				'showBlogIntro' => true,
@@ -139,6 +134,7 @@ class BlogController extends AbstractController
 
 		if ($posts) {
 			return $this->render('blog/index.html.twig', [
+				'page' => 'blog',
 				'title' => $title,
 				'posts' => $posts,
 				'showBlogIntro' => true,
@@ -187,6 +183,7 @@ class BlogController extends AbstractController
 
 		if ($posts) {
 			return $this->render('blog/index.html.twig', [
+				'page' => 'blog',
 				'title' => $title,
 				'posts' => $posts,
 				'showBlogIntro' => true,
@@ -235,6 +232,7 @@ class BlogController extends AbstractController
 
 		if ($posts) {
 			return $this->render('blog/index.html.twig', [
+				'page' => 'blog',
 				'title' => $title,
 				'posts' => $posts,
 				'showBlogIntro' => true,
@@ -296,7 +294,7 @@ class BlogController extends AbstractController
 		}
 
 		return $this->render('blog/view.html.twig', [
-			'controller_name' => 'HomeController',
+			'page' => 'blog',
 			'blogPost' => $blogPost,
 			'posts' => $posts,
 			'pages' => $numOfPostPages
