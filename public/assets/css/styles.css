@@ -2,7 +2,14 @@
   margin-top: auto;
 }
 .mt-0 {
-  margin: 0;
+  margin-top: 0;
+}
+.mt-2 {
+  margin-top: 2rem;
+}
+
+.ml-0 {
+  margin-left: 0;
 }
 
 .mb-2 {
@@ -322,6 +329,11 @@ h1, h2, h3, h4, h5, h6 {
 .flex-row > * {
   margin: auto;
 }
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 .flex--center-align {
   align-self: center;
 }
@@ -405,6 +417,33 @@ a.link--ul, .link--ul {
 }
 .cta p {
   margin: 0.75rem 0;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 10rem;
+  background-color: #FAEDFC;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-wrapper {
+  max-width: 80rem;
+  min-width: 20rem;
+  width: 75vw;
+}
+.footer-wrapper div {
+  width: fit-content;
+}
+.footer-wrapper p {
+  width: 8rem;
+  text-align: center;
+  background-color: white;
+  padding: 0.2rem 0.5rem;
+  margin: 0;
+  border-radius: 0.2rem;
 }
 
 /*# sourceMappingURL=styles.css.map */
