@@ -5,6 +5,10 @@
   margin: 0;
 }
 
+.mb-2 {
+  margin-bottom: 2rem;
+}
+
 .blue {
   color: #6077FC;
 }
@@ -223,6 +227,9 @@ h1, h2, h3, h4, h5, h6 {
   flex-wrap: wrap;
   gap: 0.2rem 0.5rem;
 }
+.flex--center-align {
+  align-self: center;
+}
 
 .pagination > a {
   color: #FC60C5;
@@ -234,6 +241,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .list-item {
   margin: 0.2rem;
+}
+.list--spaced-medium li {
+  margin-bottom: 1rem;
 }
 
 a.link, .link {
@@ -247,6 +257,21 @@ a.link-container, .link-container {
   padding: 0.1rem 0.4rem;
   border-radius: 0.4rem;
   box-shadow: 4px 4px 8px #ededed;
+}
+
+.image {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+.image--small {
+  width: 10rem;
+}
+.image--medium {
+  width: 18rem;
+}
+.image--round {
+  border-radius: 50%;
 }
 
 /*# sourceMappingURL=styles.css.map */

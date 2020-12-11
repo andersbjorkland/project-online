@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Anders Björkland - About{% endblock %}
+
+{% block body %}
+
+<div class="about-wrapper">
+    <h1>At a glance!</h1>
+    <div class="flex-row mb-2">
+        <img class="image image--small image--round" src="{{ asset('assets/images/portrait.jpg') }}" alt="Anders Björkland">
+        <ul class="flex--center-align list list--spaced-medium">
+            <li>Name is Anders</li>
+            <li>I love designing and building websites</li>
+            <li>I am enthusiastic about code, design and foot race</li>
+        </ul>
+    </div>
+    <h2>What's the deal</h2>
+    <p class="mb-2">
+        I’m a developer with skills covering web design, design implementation, and server-side development.
+        But this is just a small piece of web development. A successful website communicates with its
+        target audience, is genuine to its brand and offers a fluid experience – be it mobile friendly
+        or accessible. I focus on giving you the website that best serves your, and your target
+        audience’s needs.
+    </p>
+    <h2>Who is Anders?</h2>
+    <p class="mb-2">
+        I’m a creator and coder. Web Development is a field where design and code overlap.
+        There is ever new horizons to discover. Saying that code is my passion is entirely to the point.
+        Doing a business out of this passion was obvious once the idea was introduced.
+    </p>
+    <h3>Cheat sheet</h3>
+    <ul class="mb-2">
+        <li>First experienced coding on Amiga 500 where I made a simple shoot ‘em up with Easy Amos</li>
+        <li>An inspiring book is <em>The Real Happy Pill: Power Up Your Brain by Moving Your Body</em> by Anders Hansen</li>
+        <li>I usually listen to synthwave while coding</li>
+        <li>Music that brings me joy is Andrew W.K:s album <em>You’re not alone</em></li>
+        <li>I'm always up for a run</li>
+    </ul>
+</div>
+{% endblock %}

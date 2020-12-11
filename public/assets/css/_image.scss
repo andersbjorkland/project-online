@@ -1,0 +1,17 @@
+.image {
+  display: block;
+  height: auto;
+  max-width: 100%;
+
+  &--small {
+    width: 10rem;
+  }
+
+  &--medium {
+    width: 18rem;
+  }
+
+  &--round {
+    border-radius: 50%;
+  }
+}

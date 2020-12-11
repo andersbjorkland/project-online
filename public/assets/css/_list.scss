@@ -2,4 +2,10 @@
   &-item {
     margin: 0.2rem;
   }
+
+  &--spaced-medium {
+    li {
+      margin-bottom: 1rem;
+    }
+  }
 }
