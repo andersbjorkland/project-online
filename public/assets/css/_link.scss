@@ -13,4 +13,8 @@ a.link, .link {
     border-radius: 0.4rem;
     box-shadow: 4px 4px 8px #ededed;
   }
+
+  &--ul {
+    text-decoration: underline;
+  }
 }

@@ -13,6 +13,14 @@
   color: #6077FC;
 }
 
+.mint {
+  color: #b0fcf1;
+}
+
+.pink {
+  color: #FC60C5;
+}
+
 :root * {
   box-sizing: border-box;
 }
@@ -35,6 +43,11 @@ body {
   max-width: 80rem;
   min-width: 20rem;
   width: 75vw;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
 }
 
 code {
@@ -200,7 +213,7 @@ nav .active > .inner-container-link .change-fill {
     justify-content: center;
   }
   nav .nav-container .links-container > .active {
-    background-color: #FC60C5;
+    background-color: #b0fcf1;
   }
   nav .nav-container .inner-container-link {
     position: relative;
@@ -210,7 +223,7 @@ nav .active > .inner-container-link .change-fill {
     padding: 0.5rem 0.2rem;
     width: 5rem;
     text-decoration: none;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: white;
   }
   nav .nav-container .link-text {
     margin-top: 0.2rem;
@@ -306,6 +319,9 @@ h1, h2, h3, h4, h5, h6 {
   flex-wrap: wrap;
   gap: 0.2rem 0.5rem;
 }
+.flex-row > * {
+  margin: auto;
+}
 .flex--center-align {
   align-self: center;
 }
@@ -337,6 +353,9 @@ a.link-container, .link-container {
   border-radius: 0.4rem;
   box-shadow: 4px 4px 8px #ededed;
 }
+a.link--ul, .link--ul {
+  text-decoration: underline;
+}
 
 .image {
   display: block;
@@ -351,6 +370,41 @@ a.link-container, .link-container {
 }
 .image--round {
   border-radius: 50%;
+}
+
+.hero {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hero h1, .hero h2 {
+  text-align: center;
+}
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+.hero h2 {
+  font-size: 2rem;
+  margin-top: 1rem;
+}
+
+.cta {
+  min-width: 18rem;
+  width: 80%;
+  max-width: 45rem;
+  height: fit-content;
+  margin-top: 3rem;
+  padding: 2rem;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+.cta p {
+  margin: 0.75rem 0;
 }
 
 /*# sourceMappingURL=styles.css.map */
