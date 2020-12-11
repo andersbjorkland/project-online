@@ -12,6 +12,9 @@ body {
 
   font-family: Raleway, 'sans-serif';
   color: colors.$darkGrey;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .content-wrapper {

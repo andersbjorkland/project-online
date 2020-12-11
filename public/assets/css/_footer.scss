@@ -2,8 +2,7 @@
 @use "mixins";
 
 footer {
-  position: relative;
-  bottom: 0;
+  margin-top: auto;
   width: 100%;
   background-color: colors.$lighterPink;
 
