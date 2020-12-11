@@ -17,4 +17,17 @@
     grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
     gap: 1rem;
   }
+
+  &--project {
+    height: 30rem;
+    overflow-y: auto;
+
+    img {
+      width: 100%;
+    }
+
+    p {
+      margin: 0.5rem 0;
+    }
+  }
 }

@@ -1,6 +1,13 @@
 .mt-auto {
   margin-top: auto;
 }
+.mt-0 {
+  margin: 0;
+}
+
+.blue {
+  color: #6077FC;
+}
 
 :root * {
   box-sizing: border-box;
@@ -41,6 +48,10 @@ ul {
 .assistive-text {
   position: absolute;
   left: -4000px;
+}
+
+.blue {
+  color: #6077FC;
 }
 
 nav {
@@ -188,6 +199,16 @@ h1, h2, h3, h4, h5, h6 {
   grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   gap: 1rem;
 }
+.card--project {
+  height: 30rem;
+  overflow-y: auto;
+}
+.card--project img {
+  width: 100%;
+}
+.card--project p {
+  margin: 0.5rem 0;
+}
 
 .button, a.button {
   text-decoration: none;
@@ -209,6 +230,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 .pagination > a.active {
   color: #323232;
+}
+
+.list-item {
+  margin: 0.2rem;
+}
+
+a.link, .link {
+  color: #FC60C5;
+  text-decoration: none;
+}
+a.link:hover, .link:hover {
+  color: #4504be;
+}
+a.link-container, .link-container {
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.4rem;
+  box-shadow: 4px 4px 8px #ededed;
 }
 
 /*# sourceMappingURL=styles.css.map */

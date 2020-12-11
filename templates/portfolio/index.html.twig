@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProjectController!{% endblock %}
+
+{% block body %}
+<div class="body__wrapper">
+    <div class="hero">
+        <h1>Portfolio</h1>
+        <p>From a markdown editor to a book community, I have made a varied collection of websites.</p>
+        <p class="pink">Check them out!</p>
+    </div>
+    {% if projects is defined %}
+        <div class="card__container">
+            {% for project in projects %}
+                <div class="card card--project">
+                    <h2>{{ project.name }}</h2>
+                    {% if project.thumbnail is defined %}
+                        <img src="{{baseUrl ~ '/' ~ project.thumbnail }}" alt="{{ project.name }}">
+                    {% endif %}
+                    <div class="flex-row">
+                        {% if project.url is defined %}
+                            <p class="link-container"><a class="link" href="{{ project.url }}" target="_blank" rel="noopener">Website</a></p>
+                        {% endif %}
+                        {% if project.github is defined %}
+                            <p class="link-container"><a class="link" href="{{ project.github }}" target="_blank" rel="noopener">Github</a></p>
+                        {% endif %}
+                    </div>
+                    <p>
+                        {{ project.description|raw|striptags('<strong><em><i><span>') }}
+                    </p>
+                    {% if project.categories is defined %}
+                        <div class="flex-row mt-auto">
+                            {% for category in project.categories %}
+                                <p class="blue mt-0">{{ category.name }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

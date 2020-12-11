@@ -1,0 +1,16 @@
+@use "colors";
+
+a.link, .link {
+  color: colors.$pink;
+  text-decoration: none;
+
+  &:hover {
+    color: colors.$darkPurple;
+  }
+
+  &-container {
+    padding: 0.1rem 0.4rem;
+    border-radius: 0.4rem;
+    box-shadow: 4px 4px 8px #ededed;
+  }
+}
