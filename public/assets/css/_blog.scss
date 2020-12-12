@@ -53,4 +53,35 @@
   &__link {
     color: colors.$pink;
   }
+
+  &__hero {
+    color: white;
+    position: relative;
+    width: 100%;
+    align-self: center;
+
+    .blog_header-text {
+      position: absolute;
+      bottom: 0;
+      padding: 0 1rem 1rem 1rem;
+      width: 100%;
+
+      background-color: rgba(0,0,0, 0.5);
+    }
+
+    &-img-container {
+      background-color: black;
+      height: fit-content;
+      block-size: fit-content;
+      max-height: 100%;
+      width: 100%;
+
+      img {
+        height: auto;
+        width: auto;
+        margin: 0;
+        opacity: 0.65;
+      }
+    }
+  }
 }

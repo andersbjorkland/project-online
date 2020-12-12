@@ -2,9 +2,16 @@
 
 {% block body %}
     <article class="blog__container">
-        <div class="blog__header">
-            <h1>{{ blogPost.title }}</h1>
-            <time>{{ blogPost.publishAt | date }}</time>
+        <div class="blog__header {% if blogPost.thumbnail is not empty %} blog__hero {% endif %}">
+            {% if blogPost.thumbnail is not empty %}
+                <div class="blog__hero-img-container">
+                    <img src="{{baseUrl ~ '/' ~ blogPost.thumbnail }}" alt="{{ blogPost.title }}">
+                </div>
+            {% endif %}
+            <div class="blog_header-text">
+                <h1>{{ blogPost.title }}</h1>
+                <time>{{ blogPost.publishAt | date }}</time>
+            </div>
         </div>
         <div class="blog__content">
             {{ blogPost.content | raw }}

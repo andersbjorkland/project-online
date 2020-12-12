@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Controller\Admin\Field\VichImageField;
 use App\Entity\BlogPost;
 use App\Entity\Category;
 use App\Form\CategoryType;
@@ -13,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -32,6 +34,8 @@ class BlogPostCrudController extends AbstractCrudController
     {
 	    return [
 	    	Field::new('id')->hideOnForm(),
+		    VichImageField::new('thumbnailFile')->onlyOnForms()->setLabel("Hero Image"),
+		    ImageField::new('thumbnail')->setBasePath('/uploads/images/thumbnails')->hideOnForm()->setLabel("Hero Image"),
 		    TextField::new('title'),
 		    TextareaField::new('summary'),
 		    TextEditorField::new('content')->addCssClass('blog-text'),

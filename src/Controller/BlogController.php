@@ -284,6 +284,7 @@ class BlogController extends AbstractController
 
 	protected function presentView(BlogPost $blogPost, BlogPostRepository $blogPostRepository): Response
 	{
+		$baseUrl = $this->getParameter("app.path.thumbnails");
 
 		$posts = $blogPostRepository->getLatestPaginated();
 		$totalPostCount = $blogPostRepository->getCount();
@@ -296,6 +297,7 @@ class BlogController extends AbstractController
 		return $this->render('blog/view.html.twig', [
 			'page' => 'blog',
 			'blogPost' => $blogPost,
+			'baseUrl' => $baseUrl,
 			'posts' => $posts,
 			'pages' => $numOfPostPages
 		]);

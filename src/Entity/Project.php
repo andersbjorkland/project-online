@@ -175,13 +175,14 @@ class Project
 	/**
 	 * @param mixed $imageFile
 	 */
-	public function setThumbnailFile($thumbnailFile): void {
-                  		$this->thumbnailFile = $thumbnailFile;
-         
-                  		if ($thumbnailFile) {
-                  			$this->updatedAt = new DateTime();
-         	            }
-                  	}
+	public function setThumbnailFile($thumbnailFile): void
+	{
+        $this->thumbnailFile = $thumbnailFile;
+
+        if ($thumbnailFile) {
+            $this->updatedAt = new DateTime();
+        }
+    }
 
     public function getUpdatedAt(): ?DateTimeInterface
     {

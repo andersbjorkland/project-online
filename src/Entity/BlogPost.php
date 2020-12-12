@@ -3,13 +3,16 @@
 namespace App\Entity;
 
 use App\Repository\BlogPostRepository;
+use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=BlogPostRepository::class)
+ * @Vich\Uploadable
  */
 class BlogPost
 {
@@ -75,9 +78,26 @@ class BlogPost
      */
     private $permanentSlug;
 
+	/**
+	 * @ORM\Column(type="string", length=100, nullable=true)
+	 * @var string
+	 */
+	private $thumbnail;
+
+	/**
+	 * @Vich\UploadableField(mapping="thumbnails", fileNameProperty="thumbnail")
+	 */
+	private $thumbnailFile;
+
+	/**
+	 * @ORM\Column(type="datetime", nullable=true)
+	 */
+	private $updatedAt;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+	    $this->updatedAt = new DateTime();
     }
 
     public function getId(): ?int
@@ -232,9 +252,53 @@ class BlogPost
         return $this;
     }
 
-	public function __toString(): string {
-		return $this->title . " - " . $this->getCreatedAt()->format("Y-m-d h:m:s");
+	public function getThumbnail(): ?string
+	{
+		return $this->thumbnail;
 	}
+
+	public function setThumbnail(?string $thumbnail): self
+	{
+		$this->thumbnail = $thumbnail;
+
+		return $this;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getThumbnailFile() {
+		return $this->thumbnailFile;
+	}
+
+	/**
+	 * @param mixed $imageFile
+	 */
+	public function setThumbnailFile($thumbnailFile): void
+	{
+		$this->thumbnailFile = $thumbnailFile;
+
+		if ($thumbnailFile) {
+			$this->updatedAt = new DateTime();
+		}
+	}
+
+	public function getUpdatedAt(): ?DateTimeInterface
+	{
+		return $this->updatedAt;
+	}
+
+	public function setUpdatedAt(?DateTimeInterface $updatedAt): self
+	{
+		$this->updatedAt = $updatedAt;
+
+		return $this;
+	}
+
+	public function __toString(): string {
+        return $this->title . " - " . $this->getCreatedAt()->format("Y-m-d h:m:s");
+    }
+
 
 
 }

@@ -292,6 +292,32 @@ h1, h2, h3, h4, h5, h6 {
 .blog__link {
   color: #FC60C5;
 }
+.blog__hero {
+  color: white;
+  position: relative;
+  width: 100%;
+  align-self: center;
+}
+.blog__hero .blog_header-text {
+  position: absolute;
+  bottom: 0;
+  padding: 0 1rem 1rem 1rem;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.blog__hero-img-container {
+  background-color: black;
+  height: fit-content;
+  block-size: fit-content;
+  max-height: 100%;
+  width: 100%;
+}
+.blog__hero-img-container img {
+  height: auto;
+  width: auto;
+  margin: 0;
+  opacity: 0.65;
+}
 
 .card {
   width: 16rem;
@@ -331,9 +357,6 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-wrap: wrap;
   gap: 0.2rem 0.5rem;
-}
-.flex-row > * {
-  margin: auto;
 }
 .flex-column {
   display: flex;
