@@ -6,7 +6,7 @@
 parameters:
     items_per_page: 10
     app.path.thumbnails.dev: /uploads/images/thumbnails
-    app.path.thumbnails.prod: '%kernel.project_dir%/../../../../httpd.www/playground/uploads/images/thumbnails'
+    app.path.thumbnails.prod: '%kernel.project_dir%/../../httpd.www/staging/uploads/images/thumbnails'
 
 
 services:
