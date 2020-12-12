@@ -14,9 +14,15 @@ if (strpos($_SERVER['SERVER_NAME'], 'localhost') !== false
 	$vendors =  dirname(__DIR__).'/vendor/autoload.php';
 	$envs = dirname(__DIR__).'/.env';
 } else {
-	$vendors =  dirname(__DIR__).'/../httpd.private/staging/vendor/autoload.php';
-	$envs = dirname(__DIR__).'/../httpd.private/staging/.env';
+	if (strpos($_SERVER['SERVER_NAME'], 'staging')) {
+		$vendors = dirname( __DIR__ ) . '/../httpd.private/staging/vendor/autoload.php';
+		$envs    = dirname( __DIR__ ) . '/../httpd.private/staging/.env';
+	} else {
+		$vendors = dirname( __DIR__ ) . '/../httpd.private/prod/vendor/autoload.php';
+		$envs    = dirname( __DIR__ ) . '/../httpd.private/prod/.env';
+	}
 }
+
 require $vendors;
 
 (new Dotenv())->bootEnv($envs);
