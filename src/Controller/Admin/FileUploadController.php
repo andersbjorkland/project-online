@@ -26,7 +26,7 @@ class FileUploadController extends AbstractController
 			if (strpos($_SERVER['SERVER_NAME'], 'staging') !== false) {
 				$target = dirname(__DIR__).'/../../../../httpd.www/staging';
 			} else {
-				$target = dirname(__DIR__).'/../../../httpd.www/staging';
+				$target = dirname(__DIR__).'/../../../../httpd.www';
 			}
 		}
 
