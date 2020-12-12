@@ -19,7 +19,7 @@ class PortfolioController extends AbstractController
     	$environment = $this->getParameter("kernel.environment");
     	$baseUrl = (strtolower($environment) === 'dev') ?
 		    $this->getParameter("app.path.thumbnails.dev") :
-		    $this->getParameter("app.path.thumbnails.prod");
+		    $this->getParameter("app.path.thumbnails.dev");
 
         return $this->render('portfolio/index.html.twig', [
 	        'page' => 'portfolio',
