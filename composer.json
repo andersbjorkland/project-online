@@ -68,7 +68,8 @@
         ],
         "move-public": [
             "App\\Utility\\ProdStructure::movePublicContent"
-        ]
+        ],
+        "move-staging" : "App\\Utility\\ProdStructure::moveStagingContent"
     },
     "conflict": {
         "symfony/symfony": "*"
