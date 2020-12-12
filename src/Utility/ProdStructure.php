@@ -59,7 +59,7 @@ class ProdStructure {
 		$src = '' . $folder;
 
 		// Assumed present location is at /domain.com/httpd.private/folder/
-		$target = '../../httpd.www/staging' . $targetSubfolder;
+		$target = '../../httpd.www/staging/' . $targetSubfolder;
 
 
 		if (is_dir($src) && is_dir($target)) {
