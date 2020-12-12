@@ -14,7 +14,7 @@ if (strpos($_SERVER['SERVER_NAME'], 'localhost') !== false
 	$vendors =  dirname(__DIR__).'/vendor/autoload.php';
 	$envs = dirname(__DIR__).'/.env';
 } else {
-	if (strpos($_SERVER['SERVER_NAME'], 'staging')) {
+	if (strpos($_SERVER['SERVER_NAME'], 'staging') !== false) {
 		$vendors = dirname( __DIR__ ) . '/../httpd.private/staging/vendor/autoload.php';
 		$envs    = dirname( __DIR__ ) . '/../httpd.private/staging/.env';
 	} else {
