@@ -18,8 +18,8 @@ if (strpos($_SERVER['SERVER_NAME'], 'localhost') !== false
 		$vendors = dirname( __DIR__ ) . '/../httpd.private/staging/vendor/autoload.php';
 		$envs    = dirname( __DIR__ ) . '/../httpd.private/staging/.env';
 	} else {
-		$vendors = dirname( __DIR__ ) . '/../httpd.private/prod/vendor/autoload.php';
-		$envs    = dirname( __DIR__ ) . '/../httpd.private/prod/.env';
+		$vendors = dirname( __DIR__ ) . '/httpd.private/prod/vendor/autoload.php';
+		$envs    = dirname( __DIR__ ) . '/httpd.private/prod/.env';
 	}
 }
 
