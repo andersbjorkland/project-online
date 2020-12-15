@@ -285,6 +285,7 @@ class BlogController extends AbstractController
 	protected function presentView(BlogPost $blogPost, BlogPostRepository $blogPostRepository): Response
 	{
 		$baseUrl = $this->getParameter("app.path.thumbnails");
+		$domain = $_SERVER["SERVER_NAME"];
 
 		$posts = $blogPostRepository->getLatestPaginated();
 		$totalPostCount = $blogPostRepository->getCount();
@@ -299,7 +300,8 @@ class BlogController extends AbstractController
 			'blogPost' => $blogPost,
 			'baseUrl' => $baseUrl,
 			'posts' => $posts,
-			'pages' => $numOfPostPages
+			'pages' => $numOfPostPages,
+			'domain' => $domain
 		]);
 	}
 }
