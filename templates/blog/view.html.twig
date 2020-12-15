@@ -1,5 +1,50 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{{ blogPost.title }}{% endblock %}
+{% block metaOgTitle %}{{ blogPost.title }}{% endblock %}
+{% block metaTwitterTitle %}{{ blogPost.title }}{% endblock %}
+{% block metaDescription %}
+    {% if blogPost.summary is defined and blogPost.summary|length > 0 %}
+        {{ blogPost.summary }}
+    {% else %}
+        {{ blogPost.content|striptags('<em><strong><i><mark><cite><dfn><br />')|raw|slice(0,220) }}
+    {% endif %}
+{% endblock %}
+{% block metaOgDescription %}
+    {% if blogPost.summary is defined and blogPost.summary|length > 0 %}
+        {{ blogPost.summary }}
+    {% else %}
+        {{ blogPost.content|striptags('<em><strong><i><mark><cite><dfn><br />')|raw|slice(0,220) }}
+    {% endif %}
+{% endblock %}
+{% block metaTwitterDescription %}
+    {% if blogPost.summary is defined and blogPost.summary|length > 0 %}
+        {{ blogPost.summary }}
+    {% else %}
+        {{ blogPost.content|striptags('<em><strong><i><mark><cite><dfn><br />')|raw|slice(0,220) }}
+    {% endif %}
+{% endblock %}
+
+{% block metaOgImage %}
+    {% if blogPost.thumbnail is not empty %}
+        {{baseUrl ~ '/' ~ blogPost.thumbnail }}
+    {% endif %}
+{% endblock %}
+{% block metaTwitterImage %}
+    {% if blogPost.thumbnail is not empty %}
+        {{baseUrl ~ '/' ~ blogPost.thumbnail }}
+    {% endif %}
+{% endblock %}
+{% block additionalMeta %}
+    {% if blogPost.categories is not empty %}
+        <meta name="keywords" content="
+            {% for category in blogPost.categories %}
+                {{ category.name }},
+            {% endfor %}
+        ">
+    {% endif %}
+{% endblock %}
+
 {% block body %}
     <article class="blog__container">
         <div class="blog__header {% if blogPost.thumbnail is not empty %} blog__hero {% endif %}">
