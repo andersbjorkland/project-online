@@ -27,12 +27,12 @@
 
 {% block metaOgImage %}
     {% if blogPost.thumbnail is not empty %}
-        {{'https://' ~ domain ~ baseUrl ~ '/' ~ blogPost.thumbnail }}
+        {{('https://' ~ domain ~ baseUrl ~ '/' ~ blogPost.thumbnail)|raw }}
     {% endif %}
 {% endblock %}
 {% block metaTwitterImage %}
     {% if blogPost.thumbnail is not empty %}
-        {{'https://' ~ domain ~ baseUrl ~ '/' ~ blogPost.thumbnail }}
+        {{('https://' ~ domain ~ baseUrl ~ '/' ~ blogPost.thumbnail)|raw }}
     {% endif %}
 {% endblock %}
 {% block additionalMeta %}
