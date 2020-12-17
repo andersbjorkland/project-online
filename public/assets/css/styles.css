@@ -276,7 +276,8 @@ h1, h2, h3, h4, h5, h6 {
 .blog__container img {
   max-width: 100%;
   width: auto;
-  height: 20rem;
+  height: auto;
+  max-height: 20rem;
 }
 .blog__header {
   display: flex;
