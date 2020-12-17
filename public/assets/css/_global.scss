@@ -17,6 +17,10 @@ body {
   flex-direction: column;
 }
 
+pre {
+  overflow-x: auto;
+}
+
 .content-wrapper {
   padding: 2rem 0;
   display: flex;

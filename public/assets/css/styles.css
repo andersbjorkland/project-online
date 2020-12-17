@@ -46,6 +46,10 @@ body {
   flex-direction: column;
 }
 
+pre {
+  overflow-x: auto;
+}
+
 .content-wrapper {
   padding: 2rem 0;
   display: flex;
@@ -322,7 +326,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .card {
   width: 16rem;
-  height: 20rem;
+  min-height: 20rem;
   padding: 1rem;
   justify-self: center;
   box-shadow: 4px 4px 12px #FAEDFC;
