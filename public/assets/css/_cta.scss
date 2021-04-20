@@ -18,4 +18,9 @@
   p {
     margin: 0.75rem 0;
   }
+
+  &__content {
+    max-width: 25rem;
+    align-self: center;
+  }
 }
