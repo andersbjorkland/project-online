@@ -3,8 +3,9 @@
     "description": "The basics of my homepage",
     "type": "project",
     "license": "proprietary",
+    "version": "1.0",
     "require": {
-        "php": ">=7.2.5",
+        "php": ">=7.4.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",

@@ -31,12 +31,26 @@ task('symlink:public', function() {
     run('ln -s {{release_path}}/public/*  /www &&  ln -s {{release_path}}/public/.[^.]* /www');
 });
 
+task('cache:clear', function () {
+    run('php {{release_path}}/bin/console cache:clear');
+});
+
+/* Is used when symlink from public folder doesn't behave as expected.
+ * The downside of using it this way is that it doesn't remove files no longer present in git repo.
+ * Assumed public directory is /www
+ */
+task('copy:public', function() {
+    run('cp -R {{release_path}}/public/*  /www && cp -R {{release_path}}/public/.[^.]* /www');
+});
+
 task('build', function () {
     run('cd {{release_path}} && build');
 });
 
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
+after('deploy:unlock', 'copy:public');
+
 
 // Migrate database before symlink new release.
 
