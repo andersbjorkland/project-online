@@ -26,6 +26,7 @@
         "vich/uploader-bundle": "^1.16"
     },
     "require-dev": {
+        "deployer/deployer": "^6.8",
         "symfony/maker-bundle": "1.*",
         "symfony/stopwatch": "5.*",
         "symfony/twig-bundle": "5.*",
