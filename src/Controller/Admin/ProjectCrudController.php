@@ -30,7 +30,7 @@ class ProjectCrudController extends AbstractCrudController
 			ImageField::new('thumbnail')->setBasePath('/uploads/images/thumbnails')->hideOnForm(),
 			Field::new('github'),
 			Field::new('url'),
-			Field::new('categories'),
+			//Field::new('categories'),
 			Field::new('isDraft'),
 			CollectionField::new('categories')
 			               ->allowAdd()
