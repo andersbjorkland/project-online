@@ -1,4 +1,6 @@
 {
+    "name": "andersbjorkland/project-online",
+    "description": "The basics of my homepage",
     "type": "project",
     "license": "proprietary",
     "require": {
