@@ -30,7 +30,7 @@ set('composer_options', '{{composer_action}} --prefer-dist --no-progress --no-in
 
 
 // Shared files/dirs between deploys 
-add('shared_files', ['.env.prod.local']);
+add('shared_files', []);
 add('shared_dirs', []);
 
 // Writable dirs by web server 
@@ -83,6 +83,17 @@ task('build', function () {
     run('cd {{release_path}} && build');
 });
 
+task('initialize', [
+        'deploy:info',
+        'deploy:prepare',
+        'deploy:lock',
+        'deploy:release',
+        'deploy:update_code',
+        'deploy:shared',
+        'deploy:unlock',
+        'cleanup',
+]);
+
 task('mydeploy', [
     'deploy:info',
     'deploy:prepare',
@@ -106,5 +117,5 @@ after('deploy:failed', 'deploy:unlock');
 
 // Migrate database before symlink new release.
 
-//before('deploy:symlink', 'database:migrate');
+before('deploy:symlink', 'database:migrate');
 
