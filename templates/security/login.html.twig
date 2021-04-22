@@ -45,7 +45,9 @@
     </form>
 </div>
 <div class="flex-row mt-2 gap-1">
-    <a href="{{ path('app_register') }}">New User</a>
+    {% if allow_registration %}
+        <a href="{{ path('app_register') }}">New User</a>
+    {% endif %}
     <a href="{{ path('app_forgot_password_request') }}">Forgot password</a>
 </div>
 {% endblock %}

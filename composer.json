@@ -3,7 +3,7 @@
     "description": "The basics of my homepage",
     "type": "project",
     "license": "proprietary",
-    "version": "1.0",
+    "version": "2.0",
     "require": {
         "php": ">=7.4.1",
         "ext-ctype": "*",
