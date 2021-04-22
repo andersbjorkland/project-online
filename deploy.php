@@ -16,12 +16,6 @@ set('application', 'homepage');
 // Project repository
 set('repository', 'https://github.com/andersbjorkland/project-online');
 
-/*
-set('env', [
-    'APP_ENV' => 'prod',
-]);
-*/
-
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', false);
 set('ssh_multiplexing', false);
@@ -38,9 +32,9 @@ add('writable_dirs', []);
 set('allow_anonymous_stats', false);
 
 // Hosts
-host('satius')
+host('anders')
     ->set('deploy_path', '~/{{application}}')
-    ->set('http_user', 'satius.digital')
+    ->set('http_user', 'andersbjorkland.online')
 ;
     
 // Tasks
@@ -116,6 +110,5 @@ after('deploy:failed', 'deploy:unlock');
 
 
 // Migrate database before symlink new release.
-
 before('deploy:symlink', 'database:migrate');
 
