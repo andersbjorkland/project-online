@@ -269,6 +269,12 @@ h1, h2, h3, h4, h5, h6 {
 .blog__summary p:nth-child(3) {
   margin-top: 0.5rem;
 }
+.blog__content img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  max-height: 20rem;
+}
 .blog__container {
   display: flex;
   flex-direction: column;
@@ -279,12 +285,6 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
   width: 100%;
   margin: 1rem 0;
-}
-.blog__container img {
-  max-width: 100%;
-  width: auto;
-  height: auto;
-  max-height: 20rem;
 }
 .blog__header {
   display: flex;
@@ -322,7 +322,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .blog__hero-img-container img {
   height: auto;
-  width: auto;
+  width: 100%;
   margin: 0;
   opacity: 0.65;
 }
