@@ -4,6 +4,7 @@ namespace Deployer;
 require 'recipe/symfony4.php';
 
 /*
+ * Run either 'deploy' (Symfony 4 apps) or 'mydeploy' (adjusted for shared host one.com).
  * If running deployer as a project dependency on Windows you may need to run this:
  * php vendor/deployer/deployer/bin/dep deploy
  * instead of php vendor/bin/dep deploy
@@ -14,6 +15,10 @@ set('application', 'homepage');
 
 // Project repository
 set('repository', 'https://github.com/andersbjorkland/project-online');
+
+set('env', [
+    'APP_ENV' => 'prod',
+]);
 
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', false);
@@ -56,6 +61,10 @@ task('copy:public', function() {
 /* Uploads built assets from local to remote. Requires rsync.
  * Useful when you use Symfony encore/webpack and remote machine doesn't support npm/yarn.
  */
+task('upload:build', function() {
+    upload("public/build/", '{{release_path}}/public/build/');
+});
+
 task('upload:build', function() {
     upload("public/build/", '{{release_path}}/public/build/');
 });
