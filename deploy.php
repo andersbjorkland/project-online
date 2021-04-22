@@ -16,9 +16,11 @@ set('application', 'homepage');
 // Project repository
 set('repository', 'https://github.com/andersbjorkland/project-online');
 
+/*
 set('env', [
     'APP_ENV' => 'prod',
 ]);
+*/
 
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', false);
@@ -104,5 +106,5 @@ after('deploy:failed', 'deploy:unlock');
 
 // Migrate database before symlink new release.
 
-before('deploy:symlink', 'database:migrate');
+//before('deploy:symlink', 'database:migrate');
 
