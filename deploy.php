@@ -78,14 +78,14 @@ task('build', function () {
 });
 
 task('initialize', [
-        'deploy:info',
-        'deploy:prepare',
-        'deploy:lock',
-        'deploy:release',
-        'deploy:update_code',
-        'deploy:shared',
-        'deploy:unlock',
-        'cleanup',
+    'deploy:info',
+    'deploy:prepare',
+    'deploy:lock',
+    'deploy:release',
+    'deploy:update_code',
+    'deploy:shared',
+    'deploy:unlock',
+    'cleanup',
 ]);
 
 task('mydeploy', [
@@ -111,4 +111,3 @@ after('deploy:failed', 'deploy:unlock');
 
 // Migrate database before symlink new release.
 before('deploy:symlink', 'database:migrate');
-
