@@ -61,7 +61,7 @@ class BlogPostCrudController extends AbstractCrudController
 
 		    $entityInstance->setSlug(
 	            $entityInstance->getPublishAt()->format('Y/m/d/') .
-			    rawurlencode($entityInstance->getTitle())
+			    rawurlencode(str_replace(' ', '-', $entityInstance->getTitle()))
 	        );
 
     	if (!$entityInstance->getPermanentSlug()) {
