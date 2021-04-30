@@ -23,11 +23,7 @@ class FileUploadController extends AbstractController
 		    || strpos($_SERVER['SERVER_NAME'], '127.0.0.1') !== false) {
 			$target = $this->getParameter('kernel.project_dir') . '/public';
 		} else {
-			if (strpos($_SERVER['SERVER_NAME'], 'staging') !== false) {
-				$target = dirname(__DIR__).'/../../../../httpd.www/staging';
-			} else {
-				$target = dirname(__DIR__).'/../../../../httpd.www';
-			}
+            $target = dirname(__DIR__).'/../../../../../../httpd.www';
 		}
 
 		$destination = $target.'/uploads';
