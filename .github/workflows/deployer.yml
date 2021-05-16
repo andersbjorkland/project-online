@@ -28,8 +28,6 @@ jobs:
               IdentityFile ~/.ssh/staging.key
               StrictHostKeyChecking no
           END
-      - name: Install Deployer
-        run: composer install --dev
       - name: Deploy Symfony
         uses: deployphp/action@master
         with:
