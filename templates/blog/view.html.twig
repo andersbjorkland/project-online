@@ -59,7 +59,7 @@
             </div>
         </div>
         <div class="blog__content">
-            {{ blogPost.content | raw }}
+            {{ blogPost.content | replace({"https://andersbjorkland.online": ""}) | raw }}
         </div>
         <div class="flex-row">
             {% for category in blogPost.categories %}
